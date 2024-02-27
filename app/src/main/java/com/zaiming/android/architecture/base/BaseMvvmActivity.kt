@@ -8,7 +8,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.zaiming.android.architecture.BR
 
-abstract class BaseMvvmActivity<VDB : ViewDataBinding, VM : BaseMvvmViewModel<*, *>>(
+abstract class BaseMvvmActivity<VDB : ViewDataBinding, VM : BaseMvvmViewModel<*, *, *>>(
   @LayoutRes private val layoutId: Int,
 ) : AppCompatActivity() {
 

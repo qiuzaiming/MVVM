@@ -1,3 +1,5 @@
 package com.zaiming.android.architecture.business.datacallback
 
-interface MainCallback
+import com.zaiming.android.architecture.base.interfaces.IDataCallback
+
+interface MainCallback : IDataCallback

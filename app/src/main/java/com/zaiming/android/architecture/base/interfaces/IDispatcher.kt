@@ -1,15 +1,15 @@
 package com.zaiming.android.architecture.base.interfaces
 
 /**
- * Base UI -> ViewModel -> Model
+ * Base UI -> ViewModel -> UseCase
  *
  * @param Cb
  */
-interface IDispatcher<Cb> {
+interface IDispatcher<Cb: IDataCallback> {
 
   /**
    * data callback function
-   * Model -> ViewModel
+   * UseCase -> ViewModel
    *
    * @param callback
    */

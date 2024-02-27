@@ -6,20 +6,12 @@ import com.zaiming.android.architecture.business.usecases.actions.MainUseCase
 import com.zaiming.android.architecture.business.usecases.dispatchers.MainDispatcher
 import com.zaiming.android.architecture.business.viewdata.MainViewData
 
-class MainViewModel : BaseMvvmViewModel<MainViewData, MainDispatcher>(
+class MainViewModel : BaseMvvmViewModel<MainViewData, MainCallback, MainDispatcher>(
   data = MainViewData(),
   dispatcher = MainUseCase(),
 ), MainDispatcher {
 
-  private val dataCallback = MainDataCallbackEvent()
-
-  init {
-    setCallback(dataCallback)
-  }
-
-  override fun setCallback(callback: MainCallback) {
-    dispatcher.setCallback(callback)
-  }
+  override fun createDataCallback(): MainCallback = MainDataCallbackEvent()
 
   override fun onReleaseAction() {
   }
