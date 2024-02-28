@@ -4,15 +4,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.coroutineScope
-import com.zaiming.android.architecture.base.interfaces.IDataCallback
-import com.zaiming.android.architecture.base.interfaces.IDispatcher
+import com.zaiming.android.architecture.base.interfaces.IBaseDataCallback
+import com.zaiming.android.architecture.base.interfaces.IBaseDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
-abstract class BaseUseCase<ICB : IDataCallback> : LifecycleOwner, IDispatcher<ICB> {
+abstract class BaseUseCase<ICB : IBaseDataCallback> : LifecycleOwner, IBaseDispatcher<ICB> {
 
   private val lifecycleRegistry: LifecycleRegistry = LifecycleRegistry(this)
   override val lifecycle: Lifecycle = lifecycleRegistry

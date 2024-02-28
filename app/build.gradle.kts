@@ -36,7 +36,6 @@ android {
     generateStubs = true
   }
   buildFeatures {
-    viewBinding = true
     dataBinding = true
   }
 }

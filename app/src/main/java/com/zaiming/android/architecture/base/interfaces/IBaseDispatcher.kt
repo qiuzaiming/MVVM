@@ -5,7 +5,7 @@ package com.zaiming.android.architecture.base.interfaces
  *
  * @param Cb
  */
-interface IDispatcher<Cb: IDataCallback> {
+interface IBaseDispatcher<Cb: IBaseDataCallback> {
 
   /**
    * data callback function

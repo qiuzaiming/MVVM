@@ -1,8 +1,8 @@
 package com.zaiming.android.architecture.base
 
 import androidx.lifecycle.ViewModel
-import com.zaiming.android.architecture.base.interfaces.IDataCallback
-import com.zaiming.android.architecture.base.interfaces.IDispatcher
+import com.zaiming.android.architecture.base.interfaces.IBaseDataCallback
+import com.zaiming.android.architecture.base.interfaces.IBaseDispatcher
 
 /**
  * Base Mvvm ViewModel
@@ -10,10 +10,10 @@ import com.zaiming.android.architecture.base.interfaces.IDispatcher
  * @param VD: BaseViewData
  * @param D: IDispatcher<IDataCallback>
  */
-abstract class BaseMvvmViewModel<VD: BaseViewData, ICB: IDataCallback, D: IDispatcher<ICB>>(
+abstract class BaseMvvmViewModel<VD: BaseViewData, ICB: IBaseDataCallback, D: IBaseDispatcher<ICB>>(
   val data: VD,
   val dispatcher: D,
-) : ViewModel(), IDispatcher<ICB> {
+) : ViewModel(), IBaseDispatcher<ICB> {
 
   protected var dataCallback: ICB
 

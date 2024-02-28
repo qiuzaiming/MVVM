@@ -25,10 +25,12 @@ abstract class BaseMvvmActivity<VDB : ViewDataBinding, VM : BaseMvvmViewModel<*,
     viewModel.data.lifecycleOwner = this
     mBinding.setVariable(BR.vm, viewModel)
     mBinding.setVariable(BR.viewdata, viewModel.data)
-
+    initView()
   }
 
   abstract fun getViewModelClass(): Class<VM>
+
+  open fun initView() {}
 
   protected inline fun binding(block: VDB.() -> Unit): VDB {
     return mBinding.apply(block)
