@@ -7,6 +7,10 @@ import com.zaiming.android.architecture.bean.PlayerData
 import com.zaiming.android.architecture.databinding.AdapterMainBinding
 import com.zaiming.android.architecture.business.adapter.delegateInterfaces.IAdapterMainDelegate
 
+/**
+ * Test
+ * Main Adapter
+ */
 class MainAdapter(
   context: Context,
   delegate: IAdapterMainDelegate,

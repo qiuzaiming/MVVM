@@ -7,6 +7,10 @@ import com.zaiming.android.architecture.business.usecases.actions.MainUseCase
 import com.zaiming.android.architecture.business.usecases.dispatchers.MainDispatcher
 import com.zaiming.android.architecture.business.viewdata.MainViewData
 
+/**
+ * Test
+ * Main ViewModel
+ */
 class MainViewModel : BaseMvvmViewModel<MainViewData, MainCallback, MainDispatcher>(
   data = MainViewData(),
   dispatcher = MainUseCase(),
