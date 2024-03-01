@@ -46,6 +46,12 @@ abstract class BaseMvvmFragment<VDB : ViewDataBinding, VM : BaseMvvmViewModel<*,
     initView()
   }
 
+  override fun onDestroyView() {
+    super.onDestroyView()
+    _binding?.unbind()
+    _binding = null
+  }
+
   @BindingOnly
   protected inline fun binding(block: VDB.() -> Unit): VDB {
     return binding.apply(block)
