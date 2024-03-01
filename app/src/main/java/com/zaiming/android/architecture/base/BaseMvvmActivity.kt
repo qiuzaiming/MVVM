@@ -9,17 +9,18 @@ import androidx.lifecycle.ViewModelProvider
 import com.zaiming.android.architecture.BR
 
 abstract class BaseMvvmActivity<VDB : ViewDataBinding, VM : BaseMvvmViewModel<*, *, *>>(
-  @LayoutRes private val layoutId: Int,
+  @LayoutRes private val contentLayoutId: Int,
 ) : AppCompatActivity() {
 
-  protected lateinit var mBinding: VDB
+  protected val mBinding: VDB by lazy(LazyThreadSafetyMode.NONE) {
+    DataBindingUtil.setContentView(this, contentLayoutId)
+  }
 
   protected lateinit var viewModel: VM
 
   override fun onCreate(savedInstanceState: Bundle?) {
     viewModel = ViewModelProvider(this)[getViewModelClass()]
     super.onCreate(savedInstanceState)
-    mBinding = DataBindingUtil.setContentView(this, layoutId)
     mBinding.lifecycleOwner = this
 
     viewModel.data.lifecycleOwner = this

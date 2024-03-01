@@ -12,11 +12,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.zaiming.android.architecture.BR
 
 abstract class BaseMvvmFragment<VDB : ViewDataBinding, VM : BaseMvvmViewModel<*, *, *>>(
-  @LayoutRes private val layoutId: Int,
+  @LayoutRes private val contentLayoutId: Int,
   private val isShareActivityVm: Boolean = false
 ) : Fragment() {
 
-  protected lateinit var mBinding: VDB
+  private var _mBinding: VDB? = null
+
+  protected val mBinding: VDB
+    get() = checkNotNull(_mBinding) {
+      "Fragment $this binding can not be null"
+    }
 
   protected lateinit var viewModel: VM
 
@@ -25,7 +30,7 @@ abstract class BaseMvvmFragment<VDB : ViewDataBinding, VM : BaseMvvmViewModel<*,
     container: ViewGroup?,
     savedInstanceState: Bundle?,
   ): View {
-    mBinding = DataBindingUtil.inflate(layoutInflater, layoutId, container, false)
+    _mBinding = DataBindingUtil.inflate(layoutInflater, contentLayoutId, container, false)
     mBinding.lifecycleOwner = this
     viewModel = ViewModelProvider(if (isShareActivityVm) requireActivity() else this)[getViewModelClass()]
     viewModel.data.lifecycleOwner = this
