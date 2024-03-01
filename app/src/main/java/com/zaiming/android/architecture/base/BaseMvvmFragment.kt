@@ -10,16 +10,18 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.zaiming.android.architecture.BR
+import com.zaiming.android.architecture.utils.annotations.BindingOnly
 
 abstract class BaseMvvmFragment<VDB : ViewDataBinding, VM : BaseMvvmViewModel<*, *, *>>(
   @LayoutRes private val contentLayoutId: Int,
   private val isShareActivityVm: Boolean = false
 ) : Fragment() {
 
-  private var _mBinding: VDB? = null
+  private var _binding: VDB? = null
 
-  protected val mBinding: VDB
-    get() = checkNotNull(_mBinding) {
+  @BindingOnly
+  protected val binding: VDB
+    get() = checkNotNull(_binding) {
       "Fragment $this binding can not be null"
     }
 
@@ -30,18 +32,23 @@ abstract class BaseMvvmFragment<VDB : ViewDataBinding, VM : BaseMvvmViewModel<*,
     container: ViewGroup?,
     savedInstanceState: Bundle?,
   ): View {
-    _mBinding = DataBindingUtil.inflate(layoutInflater, contentLayoutId, container, false)
-    mBinding.lifecycleOwner = this
+    _binding = DataBindingUtil.inflate(layoutInflater, contentLayoutId, container, false)
+    binding.lifecycleOwner = this
     viewModel = ViewModelProvider(if (isShareActivityVm) requireActivity() else this)[getViewModelClass()]
     viewModel.data.lifecycleOwner = this
-    mBinding.setVariable(BR.vm, viewModel)
-    mBinding.setVariable(BR.viewdata, viewModel.data)
-    return mBinding.root
+    binding.setVariable(BR.vm, viewModel)
+    binding.setVariable(BR.viewdata, viewModel.data)
+    return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     initView()
+  }
+
+  @BindingOnly
+  protected inline fun binding(block: VDB.() -> Unit): VDB {
+    return binding.apply(block)
   }
 
   abstract fun getViewModelClass(): Class<VM>
