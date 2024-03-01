@@ -12,19 +12,24 @@
         name="viewdata"
         type="com.zaiming.android.architecture.business.viewdata.MainViewData" />
 
+    <variable
+      name="adapter"
+      type="com.zaiming.android.architecture.ui.adapter.MainAdapter" />
+
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        notify="@{viewdata.mainLiveData}"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:adapter="@{adapter}"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:notify="@{viewdata.mainLiveData}" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

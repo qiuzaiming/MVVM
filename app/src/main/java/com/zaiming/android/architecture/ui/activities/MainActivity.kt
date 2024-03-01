@@ -1,6 +1,5 @@
 package com.zaiming.android.architecture.ui.activities
 
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.zaiming.android.architecture.R
 import com.zaiming.android.architecture.base.BaseMvvmActivity
 import com.zaiming.android.architecture.business.adapter.delegateImpl.MainDelegateImpl
@@ -17,8 +16,7 @@ class MainActivity : BaseMvvmActivity<ActivityMainBinding, MainViewModel>(R.layo
   override fun getViewModelClass(): Class<MainViewModel> = MainViewModel::class.java
 
   override fun initView() {
-    with(mBinding.rvMain) {
-      layoutManager = LinearLayoutManager(this@MainActivity)
+    binding {
       adapter = MainAdapter(this@MainActivity, MainDelegateImpl(this@MainActivity))
     }
   }
