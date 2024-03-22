@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
-abstract class BaseUseCase<ICB : IBaseDataCallback> : LifecycleOwner, IBaseDispatcher<ICB> {
+abstract class BaseVmExtension<ICB : IBaseDataCallback> : LifecycleOwner, IBaseDispatcher<ICB> {
 
   private val lifecycleRegistry: LifecycleRegistry = LifecycleRegistry(this)
   override val lifecycle: Lifecycle = lifecycleRegistry
@@ -32,11 +32,11 @@ abstract class BaseUseCase<ICB : IBaseDataCallback> : LifecycleOwner, IBaseDispa
 
   final override fun onReleaseAction() {
     lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    onReleaseInUseCase()
+    onReleaseInVmExtension()
     dataCallback = null
   }
 
-  open fun onReleaseInUseCase() {}
+  open fun onReleaseInVmExtension() {}
 
   fun launch(
     context: CoroutineContext = EmptyCoroutineContext,

@@ -18,7 +18,7 @@ abstract class BaseMvvmViewModel<VD: BaseViewData, ICB: IBaseDataCallback, D: IB
   protected var dataCallback: ICB
 
   /**
-   * active create data callback: UseCase -> ViewModel
+   * active create data callback: ViewModelExtension -> ViewModel
    *
    */
   protected abstract fun createDataCallback(): ICB
@@ -38,6 +38,7 @@ abstract class BaseMvvmViewModel<VD: BaseViewData, ICB: IBaseDataCallback, D: IB
   }
 
   init {
+    @Suppress("LeakingThis")
     createDataCallback().let {
       dataCallback = it
       setCallback(it)

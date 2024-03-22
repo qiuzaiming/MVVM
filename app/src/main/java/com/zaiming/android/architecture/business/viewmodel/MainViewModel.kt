@@ -3,8 +3,8 @@ package com.zaiming.android.architecture.business.viewmodel
 import com.zaiming.android.architecture.base.BaseMvvmViewModel
 import com.zaiming.android.architecture.bean.PlayerData
 import com.zaiming.android.architecture.business.datacallback.MainCallback
-import com.zaiming.android.architecture.business.usecases.actions.MainUseCase
-import com.zaiming.android.architecture.business.usecases.dispatchers.MainDispatcher
+import com.zaiming.android.architecture.business.vmExtension.actions.MainVmExtension
+import com.zaiming.android.architecture.business.vmExtension.dispatchers.MainDispatcher
 import com.zaiming.android.architecture.business.viewdata.MainViewData
 
 /**
@@ -13,7 +13,7 @@ import com.zaiming.android.architecture.business.viewdata.MainViewData
  */
 class MainViewModel : BaseMvvmViewModel<MainViewData, MainCallback, MainDispatcher>(
   data = MainViewData(),
-  dispatcher = MainUseCase(),
+  dispatcher = MainVmExtension(),
 ), MainDispatcher {
 
   init {
