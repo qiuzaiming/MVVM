@@ -7,24 +7,27 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.zaiming.android.architecture.BR
+import com.zaiming.android.architecture.utils.annotations.BindingOnly
 
 abstract class BaseMvvmActivity<VDB : ViewDataBinding, VM : BaseMvvmViewModel<*, *, *>>(
-  @LayoutRes private val layoutId: Int,
+  @LayoutRes private val contentLayoutId: Int,
 ) : AppCompatActivity() {
 
-  protected lateinit var mBinding: VDB
+  @BindingOnly
+  protected val binding: VDB by lazy(LazyThreadSafetyMode.NONE) {
+    DataBindingUtil.setContentView(this, contentLayoutId)
+  }
 
   protected lateinit var viewModel: VM
 
   override fun onCreate(savedInstanceState: Bundle?) {
     viewModel = ViewModelProvider(this)[getViewModelClass()]
     super.onCreate(savedInstanceState)
-    mBinding = DataBindingUtil.setContentView(this, layoutId)
-    mBinding.lifecycleOwner = this
+    binding.lifecycleOwner = this
 
     viewModel.data.lifecycleOwner = this
-    mBinding.setVariable(BR.vm, viewModel)
-    mBinding.setVariable(BR.viewdata, viewModel.data)
+    binding.setVariable(BR.vm, viewModel)
+    binding.setVariable(BR.viewdata, viewModel.data)
     initView()
   }
 
@@ -32,7 +35,8 @@ abstract class BaseMvvmActivity<VDB : ViewDataBinding, VM : BaseMvvmViewModel<*,
 
   open fun initView() {}
 
+  @BindingOnly
   protected inline fun binding(block: VDB.() -> Unit): VDB {
-    return mBinding.apply(block)
+    return binding.apply(block)
   }
 }

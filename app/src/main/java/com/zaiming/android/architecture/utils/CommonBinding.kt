@@ -34,3 +34,8 @@ fun <T : Any> bindRecyclerView(recyclerView: RecyclerView, list: MutableList<T>?
     it.notifyDataSetChanged()
   }
 }
+
+@BindingAdapter("adapter")
+fun bindAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {
+  view.adapter = adapter
+}
